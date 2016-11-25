@@ -46,6 +46,23 @@ by using a call mechanism, simply because they are so short and fast that actual
 better than calling a separate copy.
 
 
+-------------------------------------------------------------------------------
+__always_inline:
+
+
+By declaring a function inline, you can direct GCC to make calls to that function faster. One way GCC
+can achieve this is to integrate that function's code into the code for its callers. This makes execution
+faster by eliminating the function-call overhead
+
+
+GCC does not inline any functions when not optimizing unless you specify the ‘always_inline’ attribute
+for the function, like this:
+
+        /* Prototype.  */
+        inline void foo (const char) __attribute__((always_inline));
+
+
 References:
 https://en.wikipedia.org/wiki/Inline_function
 http://stackoverflow.com/questions/21835664/why-declare-a-c-function-as-static-inline
+https://gcc.gnu.org/onlinedocs/gcc/Inline.html
