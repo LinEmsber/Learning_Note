@@ -1,0 +1,32 @@
+===============================================================================
+                                CPU cache
+===============================================================================
+
+A CPU cache is a hardware cache used by the central processing unit (CPU) of a computer to reduce the average
+cost (time or energy) to access data from the main memory. The cache is a smaller, faster memory which stores
+copies of the data from frequently used main memory locations. Most CPUs have different independent caches,
+including instruction and data caches, where the data cache is usually organized as a hierarchy of more cache
+levels (L1, L2, etc.).
+
+
+All modern (fast) CPUs (with few specialized exceptions[1]) have multiple levels of CPU caches. The first CPUs
+that used a cache had only one level of cache, not split into L1d (for data) and L1i (for instructions). Almost
+all current CPUs with caches have a split L1 cache. They also have L2 caches and, for larger processors, L3
+caches as well. The L2 cache is usually not split and is usually shared between cores. The L3 cache, and
+higher-level caches, are shared and not split.
+
+
+Other types of caches exist, such as, the common to all modern CPUs, the translation lookaside buffer (TLB) that
+is part of the memory management unit (MMU) that most CPUs have.
+
+
+When the processor needs to read from or write to a location in main memory, it first checks whether a copy of
+that data is in the cache. If so, the processor immediately reads from or writes to the cache, which is much
+faster than reading from or writing to main memory.
+
+Most modern desktop and server CPUs have at least three independent caches: an instruction cache to speed up
+executable instruction fetch, a data cache to speed up data fetch and store, and a translation lookaside buffer
+(TLB) used to speed up virtual-to-physical address translation for both executable instructions and data.
+
+References:
+https://en.wikipedia.org/wiki/CPU_cache
