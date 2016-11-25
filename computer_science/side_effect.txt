@@ -1,0 +1,58 @@
+===============================================================================
+                Side effect (computer science)
+===============================================================================
+
+In computer science, a function or expression is said to have a side effect if it modifies some state or
+has an observable interaction with calling functions or the outside world. For example, a particular
+function might modify a global variable or static variable, modify one of its arguments, raise an exception,
+write data to a display or file, read data, or call other side-effecting functions.
+
+In the presence of side effects, a program's behaviour may depend on history; that is, the order of evaluation
+matters. Understanding and debugging a function with side effects requires knowledge about the context and its
+possible histories.
+
+Assembly language programmers must be aware of hidden side effects — instructions that modify parts of the
+processor state which are not mentioned in the instruction's mnemonic. A classic example of a hidden side
+effect is an arithmetic instruction that implicitly modifies condition codes (a hidden side effect) while it
+explicitly modifies a register (the overt effect)
+
+
+Referential transparency:
+
+Absence of side effects is a necessary, but not sufficient, condition for referential transparency. Referential
+transparency means that an expression (such as a function call) can be replaced with its value; this requires
+that the expression has no side effects and is pure (always returns the same results on the same input).
+
+
+Temporal side effects:
+
+Side effects caused by the time taken for an operation to execute are usually ignored when discussing side effects
+and referential transparency. There are some cases, such as with hardware timing or testing, where operations are
+inserted specifically for their temporal side effects e.g. Sleep(5000) or for(int i=0; i < 10000; i++){}. These
+instructions do not change state other than taking an amount of time to complete.
+
+
+Idempotence:
+
+A function with side effects is said to be idempotent under sequential composition (f; f) if, when called with
+the same argument twice, the second call returns the same value and has no side effects which can distinguish
+it from the first call.
+For instance, consider:
+
+        x = 0;
+
+        def xSetter(n):
+                global x
+                x = n
+
+        xSetter(5)
+        xSetter(5)
+
+Here, xSetter is idempotent because the second call to xSetter (with the same argument) returns the same value
+and does not change the visible program state. Note that this is distinct from idempotence under function
+composition (f ∘ f): xSetter is not idempotent under function composition because xSetter(5) and xSetter(xSetter(5))
+set x to different values where return value of xSetter is x; in this example return value is always 5.
+
+
+References:
+https://en.wikipedia.org/wiki/Side_effect_(computer_science)
