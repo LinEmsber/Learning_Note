@@ -1,0 +1,22 @@
+===============================================================================
+                                Context Switch
+===============================================================================
+
+In computing, a context switch is the process of storing and restoring the state of a process or
+thread so that execution can be resumed from the same point at a later time. This enables multiple
+processes to share a single CPU and is an essential feature of a multitasking operating system.
+
+
+The precise meaning of "context switch" varies significantly in usage, most often to mean "thread
+switch or process switch" or "process switch only", either of which may be referred to as a "task
+switch". More finely, one can distinguish thread switch (switching between two threads within a
+given process), process switch (switching between two processes), mode switch (domain crossing:
+switching between user mode and kernel mode within a given thread), register switch, a stack frame
+switch, and address space switch (memory map switch: changing virtual memory to physical memory map).
+
+The computational cost of context switches varies significantly depending on what precisely it entails,
+from little more than a subroutine call for light-weight user processes, to very expensive, though
+typically much less than that of saving or restoring a process image.
+
+references:
+https://en.wikipedia.org/wiki/Context_switch

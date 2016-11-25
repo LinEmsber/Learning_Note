@@ -1,0 +1,14 @@
+===============================================================================
+                                Page
+===============================================================================
+
+In computer operating systems, paging is a memory management scheme by which a computer stores and
+retrieves data from secondary storage(HDD or SSD) for use in main memory (RAM). In this scheme,
+the operating system retrieves data from secondary storage in same-size blocks called pages.
+
+Paging is an important part of virtual memory implementations in modern operating systems, using
+secondary storage to let programs exceed the size of available physical memory.
+
+
+references:
+https://en.wikipedia.org/wiki/Paging

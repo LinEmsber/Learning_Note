@@ -1,0 +1,66 @@
+===============================================================================
+                        Processor register
+===============================================================================
+
+
+A processor register is a quickly accessible location available to a digital processor's CPU.Registers
+usually consist of a small amount of fast storage, although some registers have specific hardware functions,
+and may be read-only or write-only. Registers are typically addressed by mechanisms other than main memory,
+but may in some cases be memory mapped.
+
+
+Almost all computers, whether load-store architecture or not, load data from a larger memory into registers
+where it is used for arithmetic operations and is manipulated or tested by machine instructions. Manipulated
+data is then often stored back to main memory,
+
+Processor registers are normally at the top of the memory hierarchy, and provide the fastest way to access
+data. The term normally refers only to the group of registers that are directly encoded as part of an
+instruction, as defined by the instruction set. However, modern high-performance CPUs often have duplicates
+of these "architectural registers" in order to improve performance via register renaming, allowing parallel
+and speculative execution.
+
+A common property of computer programs is locality of reference, which refers to accessing the same values
+repeatedly and holding frequently used values in registers to improve performance. Allocating frequently used
+variables to registers can be critical to a program's performance; this register allocation is performed
+either by a compiler in the code generation phase, or manually by an assembly language programmer.
+
+
+Categories of registers
+
+Registers are normally measured by the number of bits they can hold, for example, an "8-bit register" or a
+"32-bit register". A processor often contains several kinds of registers, that can be classified according to
+their content or instructions that operate on them.
+
+User-accessible registers can be read or written by machine instructions.
+
+1.
+Data registers can hold numeric values such as integer and, in some architectures, floating-point values, as
+well as characters, small bit arrays and other data. In some older and low end CPUs, a special data register,
+known as the accumulator, is used implicitly for many operations.
+
+2.
+Address registers hold addresses and are used by instructions that indirectly access primary memory.
+
+        Some processors contain registers that may only be used to hold an address or only to hold numeric
+        values (in some cases used as an index register whose value is added as an offset from some address).
+
+        The stack pointer is used to manage the run-time stack.
+3.
+General-purpose registers (GPRs) can store both data and addresses, i.e., they are combined data/address
+registers .
+
+4.
+Status registers hold truth values often used to determine whether some instruction should or should not be
+executed.
+
+5.
+Floating-point registers (FPRs) store floating point numbers in many architectures.
+
+6.
+Constant registers hold read-only values such as zero, one, or pi.
+
+
+
+
+References:
+https://en.wikipedia.org/wiki/Processor_register

@@ -1,0 +1,51 @@
+===============================================================================
+                        The offsetof() Marco
+===============================================================================
+
+On the header linux/stddef.h at line 14, as follow:
+
+#define offsetof(TYPE, MEMBER)  ( (size_t) & ( (TYPE *) 0 ) -> MEMBER )
+
+
+The C library macro offsetof(TYPE, MEMBER) results in a constant integer of type size_t which is
+the offset in bytes of a structure member from the beginning of the structure.
+
+The member is given by MEMBER, and the name of the structure is given in TYPE.
+
+
+EXAMPLE:
+
+#include <stddef.h>
+#include <stdio.h>
+
+struct address
+{
+        char name[50];
+        char street[50];
+        int phone;
+};
+
+int main()
+{
+        printf("name offset = %d byte in address structure.\n",
+        offsetof(struct address, name));
+
+        printf("street offset = %d byte in address structure.\n",
+        offsetof(struct address, street));
+
+        printf("phone offset = %d byte in address structure.\n",
+        offsetof(struct address, phone));
+
+        return(0);
+}
+
+
+RESULT:
+
+name offset = 0 byte in address structure.
+street offset = 50 byte in address structure.
+phone offset = 100 byte in address structure.
+
+references:
+http://lxr.free-electrons.com/source/include/linux/stddef.h#L14
+http://www.tutorialspoint.com/c_standard_library/c_macro_offsetof.htm

@@ -1,0 +1,42 @@
+-------------------------------------------------------------------------------
+				vmlinuz
+-------------------------------------------------------------------------------
+
+A kernel is a program that constitutes the central core of a computer operating system. It is the first thing
+that is loaded into memory when a computer is booted up (i.e., started), and it remains in memory for the entire time
+that the computer is in operation.
+
+vmlinuz is the name of the Linux kernel executable.
+vmlinuz is a compressed Linux kernel, and it is bootable.
+
+vmlinuz should not be confused with vmlinux, which is the kernel in a non-compressed and non-bootable form. vmlinux is
+generally just an intermediate step to producing vmlinuz.
+
+vmlinuz is located in the /boot directory, which is the directory that contains the files needed to begin booting the
+system. The file named vmlinuz might be the actual kernel executable itself, which might bear a name such as
+/boot/vmlinuz-2.4.18-19.8.0
+
+
+The Linux kernel is compiled by issuing the following command:
+
+> make bzImage
+
+This results in the creation of a file named bzImage in a directory such as /usr/src/linux/arch/i386/linux/boot/.
+
+bzImage is then copied using the copy command to the /boot directory and simultaneously renamed vmlinuz.
+
+> cp /usr/src/linux/arch/i386/linux/boot/bzImage /boot/vmlinuz
+
+vmlinuz is not merely a compressed image. It also has gzip decompressor code built into it.
+
+Both zImage and bzImage are compressed with gzip. The difference is that zImage decompresses into low memory , and
+bzImage decompresses into high memory (more than 1MB).
+
+Virtual memory is the use of space on a hard disk drive (HDD) to simulate additional RAM (random access memory)
+capacity.
+
+
+References:
+
+http://www.linfo.org/vmlinuz.html
+https://www.ibm.com/developerworks/community/blogs/mhhaque/entry/anatomy_of_the_initrd_and_vmlinuz?lang=en

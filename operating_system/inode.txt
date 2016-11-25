@@ -1,0 +1,21 @@
+===============================================================================
+                                Inode
+===============================================================================
+
+In a Unix-style file system, the inode is a data structure used to represent a filesystem object,
+which can be one of various things including a file or a directory. Each inode stores the attributes
+and disk block location(s) of the filesystem object's data. Filesystem object attributes may
+include manipulation metadata (e.g. change, access, modify time), as well as owner and permission
+data (e.g. group-id, user-id, permissions).
+
+Directories are lists of names assigned to inodes. The directory contains an entry for itself,
+its parent, and each of its children.
+
+Details:
+A file system relies on data structures about the files, beside the file content. The former is called
+metadata—data that describes data. Each file is associated with an inode, which is identified by an
+integer number, often referred to as an i-number or inode number.
+
+
+references:
+https://en.wikipedia.org/wiki/Inode

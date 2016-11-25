@@ -1,0 +1,44 @@
+===============================================================================
+                                Data Alignment
+===============================================================================
+
+Data structure alignment is the way data is arranged and accessed in computer memory. It consists
+of two separate but related issues: data alignment and data structure padding. When a modern
+computer reads from or writes to a memory address, it will do this in word sized chunks (e.g. 4
+byte chunks on a 32-bit system) or larger.
+
+Data alignment means putting the data at a memory address equal to some multiple of the word
+size, which increases the system's performance due to the way the CPU handles memory. To align
+the data, it may be necessary to insert some meaningless bytes between the end of the last
+data structure and the start of the next, which is data structure padding.
+
+For example, when the computer's word size is 4 bytes, the data to be read should be at a memory
+address which is some multiple of 4. When this is not the case, e.g. the data starts at address
+14 instead of 16, then the computer has to read two or more 4 byte chunks and do some calculation
+before the requested data has been read, or it may generate an alignment fault. Even though the
+previous data structure end is at address 13, the next data structure should start at address 16.
+Two padding bytes are inserted between the two data structures at addresses 14 and 15 to align
+the next data structure at address 16.
+
+In Linux kernel version 2.4:
+
+Linux netlink socket uses NLMSG_ALIGN macro to round up the length of a netlink message to proper
+alignment. Reading the source code reveals that this macro align the length to next 4 bytes by using
+the following tricks.
+
+// align, len, to NLMSG_ALIGNTO
+#define NLMSG_ALIGNTO 8
+#define NLMSG_ALIGN(len) ( ((len)+NLMSG_ALIGNTO-1) & ~(NLMSG_ALIGNTO-1) )
+
+if len = 18
+
+        (18 + (8 - 1)) & ~(8 - 1) = 16
+
+if len = 23
+
+        (23 + (8 - 1)) & ~(8 - 1) = 20
+
+references:
+https://en.wikipedia.org/wiki/Data_structure_alignment
+http://wcang.blogspot.tw/2013/02/cool-bitwise-operation-tricks.html
+http://lxr.free-electrons.com/source/include/linux/netlink.h?v=2.4.37#L64

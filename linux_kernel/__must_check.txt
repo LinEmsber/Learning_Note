@@ -1,0 +1,60 @@
+===============================================================================
+                        __must_check
+===============================================================================
+
+warn_unused_result
+
+The warn_unused_result attribute causes a warning to be emitted if a caller of the function with this
+attribute does not use its return value. This is useful for functions where not checking the result
+is either a security problem or always a bug, such as realloc.
+
+This attribute use commonly in linux kernel, and it be defined as "__MUST_CHECK", as follow:
+
+linux/compiler-gcc.h#L144:
+
+        144 #define __must_check            __attribute__((warn_unused_result))
+
+
+linux/compiler.h#L327:
+
+        326 #ifndef __must_check
+        327 #define __must_check
+        328 #endif
+
+
+EXAMPLE:
+case 1:
+        int fn () __attribute__ ((warn_unused_result));
+        int foo ()
+        {
+                if (fn () < 0) return -1;
+                fn ();                          // results in warning on this line.
+                return 0;
+        }
+
+
+case 2:
+        /* Declaring Attributes of Functions */
+
+        #include <stdio.h>
+
+        int __attribute__((warn_unused_result)) f(int z)
+        {
+                return z + (z*2) + z/3 + z*z + 23;
+        }
+
+        int main()
+        {
+                int i = 7;
+
+                f(i);           // warning: ignoring return value of 'f'
+
+                return 0;
+        }
+
+
+References:
+GCC 4.8.5 Manual, p.394
+http://lxr.free-electrons.com/source/include/linux/compiler.h#L327
+http://lxr.free-electrons.com/source/include/linux/compiler-gcc.h#L144
+http://stackoverflow.com/questions/2042780/how-to-raise-warning-if-return-value-is-disregarded-gcc-or-static-code-check

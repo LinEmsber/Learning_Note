@@ -1,0 +1,28 @@
+===============================================================================
+                                page cache
+===============================================================================
+
+
+In computing, a page cache, sometimes also called disk cache, is a transparent cache for the
+pages originating from a secondary storage device such as a hard disk drive (HDD). The operating
+system keeps a page cache in otherwise unused portions of the main memory (RAM), resulting in
+quicker access to the contents of cached pages and overall performance improvements. A page cache
+is implemented in kernels with the paging memory management, and is mostly transparent to
+applications.
+
+Usually, all physical memory not directly allocated to applications is used by the operating
+system for the page cache. Since the memory would otherwise be idle and is easily reclaimed when
+applications request it, there is generally no associated performance penalty and the operating
+system might even report such memory as "free" or "available". When compared to main memory,
+hard disk drive read/write speeds are low and random accesses require expensive disk seeks; as
+a result, larger amounts of main memory bring performance improvements as more data can be
+cached in memory.
+
+Separate disk caching is provided on the hardware side, by dedicated RAM or NVRAM chips located
+either in the disk controller (in which case the cache is integrated into a hard disk drive and
+usually called disk buffer), or in a disk array controller. Such memory should not be
+confused with the page cache.
+
+
+reference:
+https://en.wikipedia.org/wiki/Virtual_file_system

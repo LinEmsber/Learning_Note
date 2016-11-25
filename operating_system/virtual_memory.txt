@@ -1,0 +1,23 @@
+===============================================================================
+                                Virtual Memory
+===============================================================================
+
+In computing, virtual memory is a memory management technique that is implemented using both
+hardware and software. It maps memory addresses used by a program, called virtual addresses,
+into physical addresses in computer memory. Main storage as seen by a process or task appears
+ as a contiguous address space or collection of contiguous segments.
+
+The operating system manages virtual address spaces and the assignment of real memory to
+virtual memory. Address translation hardware in the CPU, often referred to as a memory management
+unit (MMU), automatically translates virtual addresses to physical addresses. Software within
+the operating system may extend these capabilities to provide a virtual address space that can
+exceed the capacity of real memory and thus reference more memory than is physically present in
+the computer.
+
+The primary benefits of virtual memory include freeing applications from having to manage a shared
+memory space, increased security due to memory isolation, and being able to conceptually use more
+memory than might be physically available, using the technique of paging.
+
+
+references:
+https://en.wikipedia.org/wiki/Virtual_memory
