@@ -1,0 +1,33 @@
+===============================================================================
+                                __same_type
+===============================================================================
+
+This macro use GCC built-in functions to check the two arguments are same type or not.
+
+        435 /* Are two types/vars the same type (ignoring qualifiers)? */
+        436 #ifndef __same_type
+        437 # define __same_type(a, b) __builtin_types_compatible_p(typeof(a), typeof(b))
+        438 #endif
+
+
+int __builtin_types_compatible_p (type1, type2) [Built-in Function]
+
+You can use the built-in function __builtin_types_compatible_p to determine whether two types are the same.
+This built-in function returns 1 if the unqualified versions of the types type1 and type2 (which are types,
+not expressions) are compatible, 0 otherwise. The result of this built-in function can be used in integer
+constant expressions.
+
+This built-in function ignores top level qualifiers (e.g., const, volatile). For example, int is equivalent
+to const int.
+
+The type int[] and int[5] are compatible. On the other hand, int and char * are not compatible, even if the
+size of their types, on the particular architecture are the same. Also, the amount of pointer indirection
+is taken into account when determining similarity. Consequently, short * is not similar to short **.
+Furthermore, two types that are typedefed are considered compatible if their underlying types are compatible.
+
+An enum type is not considered to be compatible with another enum type even if both are compatible with the
+same integer type;
+
+References:
+http://lxr.free-electrons.com/source/include/linux/compiler.h#L435
+GCC manual 4.8.5 Ch.6.55 Other Built-in Functions Provided by GCC
