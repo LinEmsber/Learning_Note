@@ -1,0 +1,51 @@
+===============================================================================
+                        __must_be_array
+===============================================================================
+
+Linux kernel provide a macro, ARRAY_SIZE(), to calculate the size of array. However, the original version
+of this macro do not check the argument is whether array or not. It is a potential risk of security. Thus,
+we can add a macro, __must_be_array(), to check the argument whether is array or not.
+
+
+http://lxr.free-electrons.com/source/include/linux/compiler-gcc.h#L61
+        60 #ifdef __CHECKER__
+        61 #define __must_be_array(a)      0
+        62 #else
+        63 /* &a[0] degrades to a pointer: a different type from an array */
+        64 #define __must_be_array(a)      BUILD_BUG_ON_ZERO(__same_type((a), &(a)[0]))
+        65 #endif
+
+
+http://lxr.free-electrons.com/source/include/linux/compiler.h#L435
+        435 /* Are two types/vars the same type (ignoring qualifiers)? */
+        436 #ifndef __same_type
+        437 # define __same_type(a, b) __builtin_types_compatible_p(typeof(a), typeof(b))
+        438 #endif
+
+Example:
+        #include <stdio.h>
+
+        #define __same_type(a, b)       __builtin_types_compatible_p( typeof(a), typeof(b) )
+        #define BUILD_BUG_ON_ZERO(e)    ( sizeof( struct { int:-!!(e); } ) )
+        #define __must_be_array(a)      BUILD_BUG_ON_ZERO( __same_type( (a), &(a)[0] ) )
+        #define ARRAY_SIZE(arr)         ( sizeof(arr) / sizeof(arr[0]) + __must_be_array(arr) )
+
+        int main(void)
+        {
+                int a[10];
+                typeof(a) b;
+                int c;
+
+                printf("ARRAY_SIZE(int a[10]): %d\n", ARRAY_SIZE(a));
+                printf("ARRAY_SIZE(typeof(a) b): %d\n", ARRAY_SIZE(b));
+
+                //  error: subscripted value is neither array nor pointer nor vector
+                printf("ARRAY_SIZE(c): %d\n", ARRAY_SIZE(c));
+
+                return 0;
+        }
+
+References:
+http://frankchang0125.blogspot.tw/2012/10/linux-kernel-arraysize.html
+http://lxr.free-electrons.com/source/include/linux/compiler.h#L435
+http://lxr.free-electrons.com/source/include/linux/compiler-gcc.h#L61
