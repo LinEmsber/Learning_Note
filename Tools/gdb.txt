@@ -1,0 +1,124 @@
+===============================================================================
+                        GDB learning note
+===============================================================================
+
+-------------------------------------------------------------------------------
+GUI of GDB:
+-------------------------------------------------------------------------------
+> gdb -tui a.out
+or
+> gdbtui a.out
+or
+> gdb a.out
+> tui enable
+
+-------------------------------------------------------------------------------
+assembly layout:
+-------------------------------------------------------------------------------
+> gdb a.out
+> layout sam
+
+-------------------------------------------------------------------------------
+view both assembly and code:
+-------------------------------------------------------------------------------
+> gbdtui a.out
+> layout split
+
+
+-------------------------------------------------------------------------------
+run GDB with arguments:
+-------------------------------------------------------------------------------
+run a program with commandline args
+> gdb --args executable_file arg1 arg2 arg3
+
+set the args in the GDB
+> set args 1 22 33
+
+show the args in the GDB
+> show args
+
+Argument list to give program being debugged when it is started is "1 22 33".
+
+
+-------------------------------------------------------------------------------
+breakpoint:
+-------------------------------------------------------------------------------
+A breakpoint makes your program stop whenever a certain point in the program is reached.
+
+breakpoint at main function
+> break main
+or
+> b main
+
+
+-------------------------------------------------------------------------------
+run:
+-------------------------------------------------------------------------------
+Use the run command to start your program under GDB.
+> run
+
+
+-------------------------------------------------------------------------------
+GDB refresh screen:
+-------------------------------------------------------------------------------
+Ctrl + L
+
+
+-------------------------------------------------------------------------------
+GDB step:
+-------------------------------------------------------------------------------
+Step to next line of code. Will step into a function.
+
+> step
+or
+> s
+
+-------------------------------------------------------------------------------
+GDB next:
+-------------------------------------------------------------------------------
+Execute next line of code. Will not enter functions.
+
+> next
+or
+> n
+
+-------------------------------------------------------------------------------
+GDB print expression:
+-------------------------------------------------------------------------------
+This will print the value of the given expression. Most simple Ada expression formats are properly handled
+by GDB, so the expression can contain function calls, variables, operators, and attribute references.
+
+> print variable
+or
+> print function
+
+-------------------------------------------------------------------------------
+GDB backtrace:
+-------------------------------------------------------------------------------
+Show trace of where you are currently. Which functions you are in. Prints stack backtrace.
+
+> breaktrace
+or
+> bt
+
+-------------------------------------------------------------------------------
+GDB frame:
+-------------------------------------------------------------------------------
+Show current stack frame (function where you are stopped)
+> frame
+
+Move up a single frame (element in the call stack)
+> up
+
+Move down a single frame
+> down
+
+
+
+
+References:
+https://www.youtube.com/watch?v=713ay4bZUrw
+http://stackoverflow.com/questions/9970636/view-both-assembly-and-c-code
+http://stackoverflow.com/questions/6121094/how-do-i-run-a-program-with-commandline-args-using-gdb-within-a-bash-script
+https://sourceware.org/gdb/onlinedocs/gdb/Set-Breaks.html#Set-Breaks
+http://www.yolinux.com/TUTORIALS/GDB-Commands.html
