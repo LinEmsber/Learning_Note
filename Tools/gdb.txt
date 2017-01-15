@@ -114,6 +114,12 @@ Move down a single frame
 > down
 
 
+-------------------------------------------------------------------------------
+memory check:
+-------------------------------------------------------------------------------
+> valgrind --tool=memcheck --leak-check=yes ./test
+
+
 
 
 References:
@@ -122,3 +128,4 @@ http://stackoverflow.com/questions/9970636/view-both-assembly-and-c-code
 http://stackoverflow.com/questions/6121094/how-do-i-run-a-program-with-commandline-args-using-gdb-within-a-bash-script
 https://sourceware.org/gdb/onlinedocs/gdb/Set-Breaks.html#Set-Breaks
 http://www.yolinux.com/TUTORIALS/GDB-Commands.html
+http://cs.ecs.baylor.edu/~donahoo/tools/valgrind/
