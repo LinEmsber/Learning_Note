@@ -1,0 +1,102 @@
+===============================================================================
+                        linux kernel allocating memory
+===============================================================================
+
+
+The Linux kernel offers a richer set of memory allocation primitives, however. In this chapter,
+we look at other ways of using memory in device drivers and how to optimize your system’s memory
+resources.
+
+
+-------------------------------------------------------------------------------
+kmalloc:
+-------------------------------------------------------------------------------
+
+The first argument to kmalloc is the size of the block to be allocated. The second argument, the
+allocation flags, is much more interesting, because it controls the behavior of kmalloc in a number
+of ways.
+
+All the flags are defined in <linux/gfp.h>, and individual flags are prefixed with a double
+underscore, such as _ _GFP_DMA.
+
+kmalloc is the normal method of allocating memory for objects smaller than page size in the kernel.
+
+        void *kmalloc(size_t size, int flags);
+        void kfree(const void *);
+
+
+-------------------------------------------------------------------------------
+kmem_cache_create:
+-------------------------------------------------------------------------------
+
+The function creates a new cache object that can host any number of memory areas all of the same size,
+specified by the size argument. The name argument is associated with this cache and functions as housekeeping
+information usable in tracking problems
+
+        kmem_cache_t *kmem_cache_create(const char *name,
+                                        size_t size,
+                                        size_t offset,
+                                        unsigned long flags,
+                                        void (*constructor)(void *, kmem_cache_t *,
+                                        unsigned long flags));
+
+The constructor argument to the function are optional functions. It can be used to initialize newly allocated
+objects.
+
+
+        void *kmem_cache_alloc(kmem_cache_t *cache, int flags);
+        void kmem_cache_free(kmem_cache_t *cache, const void *obj);
+        int kmem_cache_destroy(kmem_cache_t *cache);
+
+
+-------------------------------------------------------------------------------
+Memory Pools:
+-------------------------------------------------------------------------------
+
+There are places in the kernel where memory allocations cannot be allowed to fail. As a way of guaranteeing
+allocations in those situations, the kernel developers created an abstraction known as a memory pool.
+A memory pool is really just a form of a lookaside cache that tries to always keep a list of free memory
+around for use in emergencies.
+
+
+        mempool_t *mempool_create(int min_nr,
+                                mempool_alloc_t *alloc_fn,
+                                mempool_free_t *free_fn,
+                                void *pool_data);
+
+
+The actual allocation and freeing of objects is handled by alloc_fn and free_fn, which have these prototypes:
+
+        typedef void *(mempool_alloc_t) (int gfp_mask, void *pool_data);
+        typedef void (mempool_free_t) (void *element, void *pool_data);
+
+A mempool can be resized with:
+        int mempool_resize(mempool_t *pool, int new_min_nr, int gfp_mask);
+This call, if successful, resizes the pool to have at least new_min_nr objects.
+
+If you no longer need a memory pool, return it to the system with:
+        void mempool_destroy(mempool_t *pool);
+
+
+-------------------------------------------------------------------------------
+kmalloc() v.s. keme_cache_alloc()
+-------------------------------------------------------------------------------
+
+kmalloc: It uses the generic slab caches available to any kernel code. so your module will share slab
+cache with other components in kernel.
+
+kmem_cache_alloc: It will allocate objects from a dedicated slab cache created by kmem_cache_create.
+If you specifically want a better slab cache management dedicated to your module only, that too for
+a specific type of objects, use kmem_cache_create followed by kmem_cache_alloc. USB/SCSI drivers use
+this. kmem_cache_create takes sizeof your object you want to create slab of, a name which appears in
+/proc/slabinfo and flags to govern behavior of your slab cache.
+
+
+
+References:
+Linux Device Driver 3rd
+http://lxr.free-electrons.com/source/include/linux/slab.h#L425
+http://lxr.free-electrons.com/source/mm/slab_common.c#L364
+http://lxr.free-electrons.com/source/mm/slab.c#L3569
+http://lxr.free-electrons.com/source/include/linux/mempool.h
+http://stackoverflow.com/questions/22370102/difference-between-kmalloc-and-kmem-cache-alloc
