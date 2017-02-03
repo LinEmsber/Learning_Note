@@ -1,0 +1,77 @@
+===============================================================================
+        Linked list manipulation with pointer to pointer
+===============================================================================
+
+Consider the problem of inserting a number into a sorted linked singly-linked list.
+
+        struct node {
+                int data;
+                struct node *next;
+        };
+
+        struct node *head;
+
+
+A typical solution has two pointers and a few special cases to get right:
+
+        void insert(struct node *new_node)
+        {
+                struct node *node = head, *prev = NULL;
+
+                while (node != NULL && node->data < new_node->data) {
+                        prev = node;
+                        node = node->next;
+                }
+
+                new_node->next = node;
+
+                if (prev == NULL)
+                        head = new_node;
+                else
+                        prev->next = new_node;
+        }
+
+
+But with clever use of a pointer to a pointer, you can do this with no extra cases:
+
+        void insert(struct node *new_node)
+        {
+                struct node **link = &head;
+
+                while ( *link != NULL && (*link)->data < new_node->data ){
+
+                        // link = & ( (*link) -> next );
+                        link = &(*link)->next;
+                }
+
+                new_node->next = *link;
+                *link = new_node;
+        }
+
+-------------------------------------------------------------------------------
+Explanation:
+-------------------------------------------------------------------------------
+
+Support that the original node number of list: 3, 5, 7,and 9, and new_node: 8.
+
+        link = &(*link)->next;
+
+When link become the address of node number 9, it is not satisfied condition of while loop, so
+leave this while loop.
+
+        new_node -> next = *link;
+
+The next node of the node number 8 is assigned the node number 9.
+
+        *link = new_node;
+
+It replaces the value of the number 9 by the node number 8, the value of the node number 9 is
+assigned the node number 8. Thus, the next node of the node number 7 become the node number 8.
+
+
+The same trick applies to node deletion. It’s also useful to store the previous links this way in
+non-circular doubly-linked list implementations, such as the Linux kernel’s hlist.
+
+References:
+https://www.quora.com/In-C-or-C++-what-are-your-favorite-pointer-tricks/answer/Anders-Kaseorg#
+http://lxr.free-electrons.com/source/include/linux/list.h#L592
