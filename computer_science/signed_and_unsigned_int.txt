@@ -1,3 +1,9 @@
+===============================================================================
+        convertion between signed and unsigned integer
+===============================================================================
+
+The following example shows that the convertion between signed and unsigned interger.
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
@@ -6,15 +12,15 @@
 #define BYTE_TO_BINARY_PATTERN "%c%c%c%c%c%c%c%c\n"
 
 // convert binary number to char
-#define BYTE_TO_BINARY(byte)  		\
-	(byte & 0x80 ? '1' : '0'), 	\
-	(byte & 0x40 ? '1' : '0'), 	\
-	(byte & 0x20 ? '1' : '0'), 	\
-	(byte & 0x10 ? '1' : '0'), 	\
-	(byte & 0x08 ? '1' : '0'), 	\
-	(byte & 0x04 ? '1' : '0'), 	\
-	(byte & 0x02 ? '1' : '0'), 	\
-	(byte & 0x01 ? '1' : '0')
+#define BYTE_TO_BINARY(byte)            \
+        (byte & 0x80 ? '1' : '0'),      \
+        (byte & 0x40 ? '1' : '0'),      \
+        (byte & 0x20 ? '1' : '0'),      \
+        (byte & 0x10 ? '1' : '0'),      \
+        (byte & 0x08 ? '1' : '0'),      \
+        (byte & 0x04 ? '1' : '0'),      \
+        (byte & 0x02 ? '1' : '0'),      \
+        (byte & 0x01 ? '1' : '0')
 
 
 int main()
@@ -22,15 +28,19 @@ int main()
         int8_t s_int8;
         uint8_t us_int8;
 
-        // 10 in decimal
-        s_int8 = 0b00001010;
+        // s_int8 = 0b00001010, 10 in decimal
+        s_int8 = 10;
         printf("s_int: %d, BYTE_TO_BINARY(s_int8): "BYTE_TO_BINARY_PATTERN, s_int8, BYTE_TO_BINARY(s_int8));
         us_int8 = (uint8_t) s_int8;
+        printf("us_int8 = (uint8_t) s_int8;\n");
         printf("us_int: %d, BYTE_TO_BINARY(us_int8): "BYTE_TO_BINARY_PATTERN, us_int8, BYTE_TO_BINARY(us_int8));
 
-        // -10 in decimal
-        s_int8 = 0b11110110;
+        printf("\n");
+
+        // s_int8 = 0b11110110, -10 in decimal
+        s_int8 = -10;
         printf("s_int: %d, BYTE_TO_BINARY(s_int8): "BYTE_TO_BINARY_PATTERN, s_int8, BYTE_TO_BINARY(s_int8));
         us_int8 = (uint8_t) s_int8;
+        printf("us_int8 = (uint8_t) s_int8;\n");
         printf("us_int: %d, BYTE_TO_BINARY(us_int8): "BYTE_TO_BINARY_PATTERN, us_int8, BYTE_TO_BINARY(us_int8));
 }
