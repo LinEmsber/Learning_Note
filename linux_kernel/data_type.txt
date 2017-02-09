@@ -1,0 +1,64 @@
+===============================================================================
+                Data Types in the Kernel
+===============================================================================
+
+
+Use of Standard C Types Although most programmers are accustomed to freely using standard types
+like int and long, writing device drivers requires some care to avoid typing conflicts and obscure bugs.
+
+The problem is that you can’t use the standard types when you need a 2-byte filler or something
+representing a 4-byte string, because the normal C data types are not the same size on all architectures.
+
+
+-------------------------------------------------------------------------------
+include/linux/types.h:
+-------------------------------------------------------------------------------
+        97 typedef         __u8            u_int8_t;
+        98 typedef         __s8            int8_t;
+        99 typedef         __u16           u_int16_t;
+        100 typedef         __s16           int16_t;
+        101 typedef         __u32           u_int32_t;
+        102 typedef         __s32           int32_t;
+        103
+        104 #endif /* !(__BIT_TYPES_DEFINED__) */
+        105
+        106 typedef         __u8            uint8_t;
+        107 typedef         __u16           uint16_t;
+        108 typedef         __u32           uint32_t;
+
+-------------------------------------------------------------------------------
+include/uapi/asm-generic/int-l64.h
+-------------------------------------------------------------------------------
+        19 typedef __signed__ char __s8;
+        20 typedef unsigned char __u8;
+        21
+        22 typedef __signed__ short __s16;
+        23 typedef unsigned short __u16;
+        24
+        25 typedef __signed__ int __s32;
+        26 typedef unsigned int __u32;
+        27
+        28 typedef __signed__ long __s64;
+        29 typedef unsigned long __u64;
+
+-------------------------------------------------------------------------------
+include/asm-generic/int-ll64.h:
+-------------------------------------------------------------------------------
+        15 typedef signed char s8;
+        16 typedef unsigned char u8;
+        17
+        18 typedef signed short s16;
+        19 typedef unsigned short u16;
+        20
+        21 typedef signed int s32;
+        22 typedef unsigned int u32;
+        23
+        24 typedef signed long long s64;
+        25 typedef unsigned long long u64;
+
+References:
+Linux Device Driver 3rd Ch.11
+linux kernel version 4.9
+http://lxr.free-electrons.com/source/include/linux/types.h
+http://lxr.free-electrons.com/source/include/uapi/asm-generic/int-l64.h
+http://lxr.free-electrons.com/source/include/asm-generic/int-ll64.h
