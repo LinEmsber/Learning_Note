@@ -1,0 +1,31 @@
+===============================================================================
+                        min and max
+===============================================================================
+
+        #define min(x, y) ({				\
+                typeof(x) _min1 = (x);			\
+                typeof(y) _min2 = (y);			\
+                (void) (&_min1 == &_min2);		\
+                _min1 < _min2 ? _min1 : _min2; })
+
+        #define max(x, y) ({				\
+                typeof(x) _max1 = (x);			\
+                typeof(y) _max2 = (y);			\
+                (void) (&_max1 == &_max2);		\
+                _max1 > _max2 ? _max1 : _max2; })
+
+
+The following statement is used to check the type of variable comparison. If the types of two
+variables are different, the warning message will be shown at compile time.
+
+        (void) (&_min1 == &_min2);
+
+The following statemnet is shown from GCC at compile time.
+
+        warning: comparison of distinct pointer types lacks a cast
+                 (void) (&_min1 == &_min2);  \
+
+References:
+Linux Kernel version 4.8
+https://github.com/torvalds/linux/blob/v4.8/include/linux/kernel.h
+http://www.itread01.com/articles/1478443805.html
