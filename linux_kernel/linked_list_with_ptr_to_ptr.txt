@@ -1,0 +1,136 @@
+===============================================================================
+        Linked list manipulation with pointer to pointer
+===============================================================================
+
+
+-------------------------------------------------------------------------------
+linked list 1
+-------------------------------------------------------------------------------
+Consider the problem of inserting a number into a sorted linked singly-linked list.
+
+        struct node {
+                int data;
+                struct node *next;
+        };
+
+        struct node *head;
+
+
+A typical solution has two pointers and a few special cases to get right:
+
+        void insert(struct node *new_node)
+        {
+                struct node *node = head, *prev = NULL;
+
+                while (node != NULL && node->data < new_node->data) {
+                        prev = node;
+                        node = node->next;
+                }
+
+                new_node->next = node;
+
+                if (prev == NULL)
+                        head = new_node;
+                else
+                        prev->next = new_node;
+        }
+
+
+But with clever use of a pointer to a pointer, you can do this with no extra cases:
+
+        void insert(struct node *new_node)
+        {
+                struct node **link = &head;
+
+                while ( *link != NULL && (*link)->data < new_node->data ){
+
+                        // link = & ( (*link) -> next );
+                        link = &(*link)->next;
+                }
+
+                new_node->next = *link;
+                *link = new_node;
+        }
+
+-------------------------------------------------------------------------------
+linked list 1 Explanation:
+-------------------------------------------------------------------------------
+
+Support that the original node number of list: 3, 5, 7,and 9, and new_node: 8.
+
+        link = &(*link)->next;
+
+When link become the address of node number 9, it is not satisfied condition of while loop, so
+leave this while loop.
+
+        new_node -> next = *link;
+
+The next node of the node number 8 is assigned the node number 9.
+
+        *link = new_node;
+
+It replaces the value of the number 9 by the node number 8, the value of the node number 9 is
+assigned the node number 8. Thus, the next node of the node number 7 become the node number 8.
+
+
+The same trick applies to node deletion. It’s also useful to store the previous links this way in
+non-circular doubly-linked list implementations, such as the Linux kernel’s hlist.
+
+
+-------------------------------------------------------------------------------
+linked list 2
+-------------------------------------------------------------------------------
+
+
+As a final example, let's look at how pointers to pointers can be used to eliminate a nuisance we've
+had when trying to insert and delete items in linked lists. For simplicity, we'll consider lists of
+integers, built using this structure:
+
+        struct list {
+                int item;
+                struct list *next;
+        };
+
+Suppose we're trying to write some code to delete a given integer from a list. The straightforward
+solution looks like this:
+
+	/* delete node containing i from list pointed to by lp */
+
+	struct list *lp, *prevlp;
+
+	for( lp = list; lp != NULL; lp = lp->next ) {
+
+		if(lp->item == i) {
+
+                        if(lp == list){
+                                list = lp->next;
+                        } else	{
+                                prevlp->next = lp->next;
+                        }
+
+			break;
+		}
+
+		prevlp = lp;
+	}
+
+We can write another version of the list-deletion code, which is (in some ways, at least) much cleaner,
+by using a pointer to a pointer to a struct list.
+
+        struct list **lpp;
+
+        for(lpp = &list; *lpp != NULL; lpp = &(*lpp)->next) {
+
+                if((*lpp)->item == i) {
+
+                        *lpp = (*lpp)->next;
+                        break;
+                }
+        }
+
+
+References:
+http://c-faq.com/~scs/cclass/int/sx8.html
+https://www.quora.com/In-C-or-C++-what-are-your-favorite-pointer-tricks/answer/Anders-Kaseorg#
+https://grisha.org/blog/2013/04/02/linus-on-understanding-pointers/
+http://lxr.free-electrons.com/source/include/linux/list.h#L592
