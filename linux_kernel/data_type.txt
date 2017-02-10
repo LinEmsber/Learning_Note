@@ -56,9 +56,42 @@ include/asm-generic/int-ll64.h:
         24 typedef signed long long s64;
         25 typedef unsigned long long u64;
 
+-------------------------------------------------------------------------------
+Linux/include/linux/kernel.h
+-------------------------------------------------------------------------------
+
+17 #define USHRT_MAX       ((u16)(~0U))
+18 #define SHRT_MAX        ((s16)(USHRT_MAX>>1))
+19 #define SHRT_MIN        ((s16)(-SHRT_MAX - 1))
+20 #define INT_MAX         ((int)(~0U>>1))
+21 #define INT_MIN         (-INT_MAX - 1)
+22 #define UINT_MAX        (~0U)
+23 #define LONG_MAX        ((long)(~0UL>>1))
+24 #define LONG_MIN        (-LONG_MAX - 1)
+25 #define ULONG_MAX       (~0UL)
+26 #define LLONG_MAX       ((long long)(~0ULL>>1))
+27 #define LLONG_MIN       (-LLONG_MAX - 1)
+28 #define ULLONG_MAX      (~0ULL)
+29 #define SIZE_MAX        (~(size_t)0)
+30
+31 #define U8_MAX          ((u8)~0U)
+32 #define S8_MAX          ((s8)(U8_MAX>>1))
+33 #define S8_MIN          ((s8)(-S8_MAX - 1))
+34 #define U16_MAX         ((u16)~0U)
+35 #define S16_MAX         ((s16)(U16_MAX>>1))
+36 #define S16_MIN         ((s16)(-S16_MAX - 1))
+37 #define U32_MAX         ((u32)~0U)
+38 #define S32_MAX         ((s32)(U32_MAX>>1))
+39 #define S32_MIN         ((s32)(-S32_MAX - 1))
+40 #define U64_MAX         ((u64)~0ULL)
+41 #define S64_MAX         ((s64)(U64_MAX>>1))
+42 #define S64_MIN         ((s64)(-S64_MAX - 1))
+
+
 References:
 Linux Device Driver 3rd Ch.11
 linux kernel version 4.9
 http://lxr.free-electrons.com/source/include/linux/types.h
+http://lxr.free-electrons.com/source/include/linux/kernel.h
 http://lxr.free-electrons.com/source/include/uapi/asm-generic/int-l64.h
 http://lxr.free-electrons.com/source/include/asm-generic/int-ll64.h
