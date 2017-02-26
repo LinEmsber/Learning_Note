@@ -18,5 +18,57 @@ The computational cost of context switches varies significantly depending on wha
 from little more than a subroutine call for light-weight user processes, to very expensive, though
 typically much less than that of saving or restoring a process image.
 
+-------------------------------------------------------------------------------
+Cost
+-------------------------------------------------------------------------------
+Context switches are usually computationally intensive, and much of the design of operating systems
+is to optimize the use of context switches. Switching from one process to another requires a certain
+amount of time for doing the administration – saving and loading registers and memory maps, updating
+various tables and lists, etc.
+
+What is actually involved in a context switch varies between these senses and between processors and
+operating systems. For example, in the Linux kernel, context switching involves switching registers,
+stack pointer, and program counter, but is independent of address space switching, though in a process
+switch an address space switch also happens.
+
+-------------------------------------------------------------------------------
+When to switch?
+-------------------------------------------------------------------------------
+
+1. Multitasking
+Most commonly, within some scheduling scheme, one process must be switched out of the CPU so another
+process can run. This context switch can be triggered by the process making itself unrunnable, such
+as by waiting for an I/O or synchronization operation to complete. On a pre-emptive multitasking system,
+the scheduler may also switch out processes which are still runnable. To prevent other processes from
+being starved of CPU time, preemptive schedulers often configure a timer interrupt to fire when a process
+exceeds its time slice. This interrupt ensures that the scheduler will gain control to perform a context
+switch.
+
+2. Interrupt handling
+
+Modern architectures are interrupt driven. This means that if the CPU requests data from a disk, for
+example, it does not need to busy-wait until the read is over; it can issue the request and continue
+with some other execution. When the read is over, the CPU can be interrupted and presented with the
+read. For interrupts, a program called an interrupt handler is installed, and it is the interrupt
+handler that handles the interrupt from the disk.
+
+When an interrupt occurs, the hardware automatically switches a part of the context (at least enough
+to allow the handler to return to the interrupted code). The handler may save additional context,
+depending on details of the particular hardware and software designs. The kernel does not spawn or
+schedule a special process to handle interrupts, but instead the handler executes in the context
+established at the beginning of interrupt handling. Once interrupt servicing is complete, the context
+in effect before the interrupt occurred is restored so that the interrupted process can resume
+execution in its proper state.
+
+-------------------------------------------------------------------------------
+Performance
+
+-------------------------------------------------------------------------------
+Context switching itself has a cost in performance, due to running the task scheduler, TLB flushes,
+and indirectly due to sharing the CPU cache between multiple tasks.[4] Switching between threads of
+a single process can be faster than between two separate processes, because threads share the same
+virtual memory maps, so a TLB flush is not necessary.
+
+
 references:
 https://en.wikipedia.org/wiki/Context_switch
