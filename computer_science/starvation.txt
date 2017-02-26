@@ -1,0 +1,38 @@
+===============================================================================
+                                Starvation
+===============================================================================
+
+
+What is Starvation?
+
+From the dictionary of medical science, starvation is a result of severe or total lack of nutrients
+that are needed for the maintenance of life. Similarly, in computer science, starvation is a problem
+that is encountered when multiple threads or processes wait for the same resource, which is called a
+deadlock.
+
+Starvation occurs when one or more threads in your program are blocked from gaining access to a
+resource and, as a result, cannot make progress.
+
+In order to get out from a deadlock, one of the processes or threads should have to give up or roll
+back so that the other thread or process can use the resource. If this continuously happens and the
+same process or thread have to give up or roll back each time while letting other processes or threads
+to use the resource, then the selected process or thread, which rolled back will undergo a situation
+called starvation. Therefore, in order to get out from a deadlock, starvation is one of the solutions.
+Therefore, sometimes starvation is called a kind of a livelock. When there are many high priority
+processes or threads, a lower priority process or thread will always starve in a deadlock.
+
+
+What is Deadlock?
+
+A deadlock is a condition that occurs when two threads or processes wait for each other to complete
+the task. They will only hang up but never stop or finish their task. In computer science, deadlocks
+can be seen everywhere.
+
+Deadlock is one of the main problems in multiprocessing systems and parallel computing. As a solution,
+a locking system called process synchronization is implemented for software as well as hardware.
+
+
+References:
+Operating System Concepts Ch.9
+http://www.differencebetween.com/difference-between-deadlock-and-vs-starvation/
+http://antrash.pixnet.net/blog/post/91984155-deadlock%E8%B7%9Fstarvation%E6%95%99%E6%9C%83%E6%88%91%E7%9A%84%E4%BA%BA%E7%94%9F%E5%93%B2%E5%AD%B8
