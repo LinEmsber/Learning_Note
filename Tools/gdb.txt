@@ -11,6 +11,8 @@ or
 or
 > gdb a.out
 > tui enable
+or
+> ctrl + a
 
 -------------------------------------------------------------------------------
 assembly layout:
@@ -68,6 +70,7 @@ Ctrl + L
 GDB step:
 -------------------------------------------------------------------------------
 Step to next line of code. Will step into a function.
+You can step into a target function to print its local variables.
 
 > step
 or
@@ -91,6 +94,20 @@ by GDB, so the expression can contain function calls, variables, operators, and 
 > print variable
 or
 > print function
+
+-------------------------------------------------------------------------------
+GDB print variable in hexadecimal, decimal, or binary:
+-------------------------------------------------------------------------------
+
+hexadecimal:
+> p/x variable
+
+decimal:
+> p/d variable
+
+binary:
+> p/t variable
+
 
 -------------------------------------------------------------------------------
 GDB backtrace:
