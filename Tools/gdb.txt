@@ -115,6 +115,32 @@ Move down a single frame
 
 
 -------------------------------------------------------------------------------
+registers:
+-------------------------------------------------------------------------------
+Print the names and values of all registers except floating-point and vector registers (in the selected stack frame).
+> info registers
+
+Print the names and values of all registers, including floating-point and vector registers (in the selected stack frame).
+> info all-registers
+
+you could print the program counter in hex with
+> p/x $pc
+
+or print the instruction to be executed next with
+> x/i $pc
+
+or add four to the stack pointer11 with
+> set $sp += 4
+
+
+-------------------------------------------------------------------------------
+eflags:
+-------------------------------------------------------------------------------
+show the value of flags register now
+> info reg eflags
+
+
+-------------------------------------------------------------------------------
 memory check:
 -------------------------------------------------------------------------------
 > valgrind --tool=memcheck --leak-check=yes ./test
@@ -129,3 +155,5 @@ http://stackoverflow.com/questions/6121094/how-do-i-run-a-program-with-commandli
 https://sourceware.org/gdb/onlinedocs/gdb/Set-Breaks.html#Set-Breaks
 http://www.yolinux.com/TUTORIALS/GDB-Commands.html
 http://cs.ecs.baylor.edu/~donahoo/tools/valgrind/
+https://en.wikipedia.org/wiki/FLAGS_register
+https://blog.louie.lu/2016/09/04/gdb-%E9%A1%AF%E7%A4%BA-flags-register/
