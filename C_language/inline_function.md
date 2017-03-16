@@ -24,7 +24,7 @@ will be translated into:
         x = y;
         y = temp;
 
- When implementing a sorting algorithm doing lots of swaps, this can increase the execution speed.
+When implementing a sorting algorithm doing lots of swaps, this can increase the execution speed.
 
 It encourages the compiler to build the function into the code where it is used (generally with the goal of improving execution speed).
 
@@ -44,7 +44,8 @@ GCC does not inline any functions when not optimizing unless you specify the ‘
         inline void foo (const char) __attribute__((always_inline));
 
 
-References:
-https://en.wikipedia.org/wiki/Inline_function
-http://stackoverflow.com/questions/21835664/why-declare-a-c-function-as-static-inline
-https://gcc.gnu.org/onlinedocs/gcc/Inline.html
+## References:
+- [wiki Inline_function](https://en.wikipedia.org/wiki/Inline_function) 
+- [Why is static keyword required for inline function?](http://stackoverflow.com/questions/17438510/why-is-static-keyword-required-for-inline-function)
+- [why-declare-a-c-function-as-static-inline](http://stackoverflow.com/questions/21835664/why-declare-a-c-function-as-static-inline)
+- [GNU gcc online doc](https://gcc.gnu.org/onlinedocs/gcc/Inline.html)
