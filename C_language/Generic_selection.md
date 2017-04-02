@@ -1,12 +1,6 @@
 # Generic selsection
 
 ## Introduction
-Provides a way to choose one of several expressions at compile time, based on a type of a controlling expression.
-
-## source code
-# Generic selsection
-
-## Introduction
 Provides a way to choose one of several expressions at compile time, based on a type of a controlling expression
 
 ## source code
