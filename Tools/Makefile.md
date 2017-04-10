@@ -2,6 +2,22 @@
 
 ## Basic usage
 
+The general syntax of a Makefile target rule is:
+
+```Makefile
+target [target...] : [dependent ....]
+[ command ...]
+```
+
+- simple example:
+
+```Makefile
+hello: main.o factorial.o hello.o
+	gcc main.o factorial.o hello.o -o hello
+```
+
+- example with some flags:
+
 ```Makefile
 CC = gcc
 CFLAGS = -g -Wall -O0
@@ -130,7 +146,46 @@ subsystem:
 ```
 
 
+## Special macros
+
+1. The file name of the target.
+```Makefile
+$@
+```
+
+2. The name of the first dependency.
+```Makefile
+$<
+```
+
+3. The part of a filename which matched a suffix rule.
+```Makefile
+$*
+```
+
+4. The names of all the dependencies newer than the target separated by spaces.
+```Makefile
+$?
+```
+
+5. The names of all the dependencies separated by spaces, but with duplicate names removed.
+```Makefile
+$^
+```
+
+6. The names of all the dependencies separated by spaces with duplicate names included and in the same order as in the rule.
+```Makefile
+$+
+```
+
+## Usage example
+
+- [makefile_example](https://github.com/LinEmsber/Projects/tree/master/makefile_example)
+
+
 ## References:
 - [gnu-make-autotools-cmake](http://www.slideshare.net/zzz00072/gnu-make-autotools-cmake)
 - [gnu make manual](https://www.gnu.org/software/make/manual/make.html)
 - [gnu make manual recursive](https://www.gnu.org/software/make/manual/html_node/Recursion.html)
+- [Special macros](https://users.cs.duke.edu/~ola/courses/programming/Makefiles/node7.html)
+- [makefile tutorials](http://www.cs.colby.edu/maxwell/courses/tutorials/maketutor/)
