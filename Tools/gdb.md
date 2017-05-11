@@ -100,6 +100,13 @@ Use the run command to start your program under GDB.
 > run
 ```
 
+## start:
+
+The "start" command does the equivalent of setting a temporary breakpoint at the beginning of the main procedure and then invoking the ‘run’ command.
+```bash
+> start
+```
+
 ## GDB refresh screen:
 ``` bash
 Ctrl + L
@@ -158,6 +165,15 @@ Show trace of where you are currently. Which functions you are in. Prints stack 
 > breaktrace
 or
 > bt
+```
+
+## watch:
+Set a watchpoint for an expression.
+GDB will break when the expression expr is written into by the program and its value changes.
+The simplest (and the most popular) use of this command is to watch the value of a single variable.
+
+```bash
+> watch foo
 ```
 
 ## GDB frame:
@@ -234,6 +250,7 @@ content of array[2]
 ```
 
 ## References:
+- [Debugging with GDB](https://sourceware.org/gdb/onlinedocs/gdb/index.html)
 - [Become a GDB Power User](https://www.youtube.com/watch?v=713ay4bZUrw)
 - [GDB view assembly](http://stackoverflow.com/questions/9970636/view-both-assembly-and-c-code)
 - [GDB with arguemnts](http://stackoverflow.com/questions/6121094/how-do-i-run-a-program-with-commandline-args-using-gdb-within-a-bash-script)
