@@ -1,6 +1,6 @@
 # GDB learning note
 
-## TUI Commands:
+## Enable TUI:
 
 ```bash
 > gdb -tui a.out
@@ -11,6 +11,13 @@ or
 > tui enable
 or
 > ctrl + a
+```
+
+## Disable TUI:
+
+In the gdbtui.
+```bash
+> tui disable
 ```
 
 ## assembly layout:
@@ -158,6 +165,25 @@ binary:
 > p/t variable
 ```
 
+## Exam memory:
+
+exam program counter:
+```bash
+> x/10i $pc
+```
+
+exam main function:
+```bash
+> x/10i main
+```
+
+exam function:
+
+```bash
+> x/10i <function>
+```
+
+
 ## GDB backtrace:
 Show trace of where you are currently. Which functions you are in. Prints stack backtrace.
 
@@ -191,6 +217,14 @@ Move up a single frame (element in the call stack)
 ```bash
 Move down a single frame
 > down
+```
+
+## Show machine code
+
+The command disassemble to display a range of addresses as machine instructions.
+
+```bash
+disass <function>
 ```
 
 ## registers:
