@@ -37,32 +37,32 @@ In the gdbtui.
 
 Make the next window active for scrolling.
 ```bash
-focus next
+> focus next
 ```
 
 Make the previous window active for scrolling.
 ```bash
-focus prev
+> focus prev
 ```
 
 Make the source window active for scrolling.
 ```bash
-focus src
+> focus src
 ```
 
 Make the assembly window active for scrolling.
 ```bash
-focus asm
+> focus asm
 ```
 
 Make the register window active for scrolling.
 ```bash
-focus regs
+> focus regs
 ```
 
 Make the command window active for scrolling.
 ```bash
-focus cmd
+> focus cmd
 ```
 
 ## run GDB with arguments:
@@ -87,8 +87,8 @@ Argument list to give program being debugged when it is started is "1 22 33".
 ## breakpoint:
 A breakpoint makes your program stop whenever a certain point in the program is reached.
 
-```bash
 breakpoint at main function
+```bash
 > break main
 or
 > b main
@@ -96,9 +96,23 @@ or
 
 set up a break point inside C program
 ```bash
-break [file_name]:line_number
+> break [file_name]:line_number
 or
-break [file_name]:func_name
+> break [file_name]:function_name
+```
+
+Print a table of all breakpoints
+
+```bash
+> info break
+```
+
+Remove breakpoint from line number or function
+
+```bash
+> clear [line_number]
+or
+> clear [function_name]
 ```
 
 ## run:
@@ -109,7 +123,7 @@ Use the run command to start your program under GDB.
 
 ## start:
 
-The "start" command does the equivalent of setting a temporary breakpoint at the beginning of the main procedure and then invoking the ‘run’ command.
+The "start" command does the equivalent of setting a temporary breakpoint at the beginning of the main procedure and then invoking the "run" command.
 ```bash
 > start
 ```
@@ -180,7 +194,7 @@ exam main function:
 exam function:
 
 ```bash
-> x/10i <function>
+> x/10i [function]
 ```
 
 
@@ -200,6 +214,12 @@ The simplest (and the most popular) use of this command is to watch the value of
 
 ```bash
 > watch foo
+```
+
+Print a table of all watchpoints
+
+```bash
+> info watch
 ```
 
 ## GDB frame:
@@ -228,8 +248,8 @@ disass <function>
 ```
 
 ## registers:
-Print the names and values of all registers except floating-point and vector registers (in the selected stack frame).
 
+Print the names and values of all registers except floating-point and vector registers (in the selected stack frame).
 ```bash
 > info registers
 ```
@@ -279,6 +299,8 @@ content of array[2]
 ```
 
 ## memory check:
+
+In the bash command line:
 ```bash
 > valgrind --tool=memcheck --leak-check=yes ./test
 ```
