@@ -1,0 +1,65 @@
+# Mutex v.s. Semaphore
+
+## Introduction
+Mutual exclusion and semaphore are used to protect shared resources.
+
+Mutex can be released only by thread that had acquired it, while you can signal semaphore from any other
+thread (or process), so semaphores are more suitable for some synchronization problems like producer and
+consumer.
+
+## Mutex
+
+A Mutex is "owned" by the task that takes it. If Task B attempts to unlock a mutex currently held by
+Task A, Task B's call will return an error and fail.
+
+Mutexes always use the following sequence:
+
+```bash
+lock mutex
+critical section
+unlock mutex
+```
+
+```bash
+Thread A                Thread B
+---------------------------------------
+lock Mutex
+access data
+...                     lock Mutex      // Will block
+...
+...
+unlock Mutex            ...
+                        access data     // Unblocks
+                        ...
+                        ...
+                        ...
+                        unlock Mutex
+```
+
+## Semaphore
+
+Task B is pended waiting for something to happen (a sensor being tripped for example).
+Sensor Trips and an Interrupt Service Routine runs. It needs to notify a task of the trip.
+Task B should run and take appropriate actions for the sensor trip. Then go back to waiting.
+
+```bash
+Task A                          Task B
+---------------------------------------
+...                             take semaphore                  // wait for something
+...                             still waiting
+do something noteworthy         still waiting
+give semaphore                  start to do something           // unblocks
+```
+
+Note that with a semaphore, it is OK for Task B to take the semaphore and A to give it.
+Again, a semaphore is NOT protecting a resource from access. The act of giving and taking a semaphore are
+fundamentally decoupled.
+
+## Semaphore vs condition variables:
+
+http://stackoverflow.com/questions/3513045/conditional-variable-vs-semaphore
+
+## References:
+ - [Mutual exclusion](https://en.wikipedia.org/wiki/Mutual_exclusion)
+ - [Semaphore (programming) Wiki](https://en.wikipedia.org/wiki/Semaphore_programming)
+ - [Difference between binary semaphore and mutex](http://stackoverflow.com/questions/62814/difference-between-binary-semaphore-and-mutex)
