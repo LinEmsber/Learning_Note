@@ -180,7 +180,7 @@ $+
 
 ## Usage example
 
-- [makefile_example](https://github.com/LinEmsber/Projects/tree/master/makefile_example)
+- [makefile_example](https://github.com/LinEmsber/Linux_Programming/tree/master/makefile_example)
 
 
 ## References:
