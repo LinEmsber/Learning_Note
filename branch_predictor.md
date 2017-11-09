@@ -13,5 +13,11 @@ The first time a conditional jump instruction is encountered, there is not much 
 
 Branch prediction is not the same as branch target prediction. Branch prediction attempts to guess whether a conditional jump will be taken or not. Branch target prediction attempts to guess the target of a taken conditional or unconditional jump before it is computed by decoding and executing the instruction itself. Branch prediction and branch target prediction are often combined into the same circuitry.
 
+## Static branch prediction
+Static prediction is the simplest branch prediction technique because it does not rely on information about the dynamic history of code executing. Instead it predicts the outcome of a branch based solely on the branch instruction.
+
+## Dynamic branch prediction
+Dynamic branch prediction uses information about taken or not taken branches gathered at run-time to predict the outcome of a branch.
+
 ## References:
 - [Branch Predictor](https://en.wikipedia.org/wiki/Branch_predictor)
