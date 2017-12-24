@@ -82,8 +82,6 @@ Argument list to give program being debugged when it is started is "1 22 33".
 > show args
 ```
 
-
-
 ## breakpoint:
 A breakpoint makes your program stop whenever a certain point in the program is reached.
 
@@ -169,14 +167,42 @@ hexadecimal:
 > p/x variable
 ```
 
-```bash
 decimal:
+```bash
 > p/d variable
 ```
 
 binary:
 ```bash
 > p/t variable
+```
+
+## whatis
+Print the data type of expression expr.
+```bash
+> whatis expr
+```
+
+## ptype expr
+Print a description of the type of expression expr.
+ptype differs from, whatis, by printing a detailed description, instead of just the name of the type.
+
+For example, for this variable declaration:
+
+```c
+struct complex {double real; double imag;} v;
+```
+
+the two commands give this output:
+
+```bash 	
+(gdb) whatis v
+type = struct complex
+(gdb) ptype v
+type = struct complex {
+    double real;
+    double imag;
+}
 ```
 
 ## Exam memory:

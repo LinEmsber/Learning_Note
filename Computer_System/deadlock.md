@@ -1,7 +1,6 @@
-===============================================================================
-                                Deadlock
-===============================================================================
+# Deadlock
 
+## Introduction
 In concurrent computing, a deadlock occurs when two competing actions wait for the other to
 finish, and thus neither ever does. Deadlock is a common problem in multiprocessing systems,
 parallel computing, and distributed systems, where software and hardware locks are used to
@@ -24,21 +23,21 @@ resolve itself. Because of this, a database management system will typically kil
 of the process that has done the least amount of work.
 
 
-Livelock:
+## Livelock
 
-A livelock is similar to a deadlock, except that the states of the processes involved in the livelock 
-constantly change with regard to one another, none progressing. Livelock is a special case of resource 
+A livelock is similar to a deadlock, except that the states of the processes involved in the livelock
+constantly change with regard to one another, none progressing. Livelock is a special case of resource
 starvation; the general definition only states that a specific process is not progressing.
 
-A real-world example of livelock occurs when two people meet in a narrow corridor, and each tries to 
-be polite by moving aside to let the other pass, but they end up swaying from side to side without 
+A real-world example of livelock occurs when two people meet in a narrow corridor, and each tries to
+be polite by moving aside to let the other pass, but they end up swaying from side to side without
 making any progress because they both repeatedly move the same way at the same time.
 
 Livelock is a risk with some algorithms that detect and recover from deadlock. If more than one process
-takes action, the deadlock detection algorithm can be repeatedly triggered. This can be avoided by 
+takes action, the deadlock detection algorithm can be repeatedly triggered. This can be avoided by
 ensuring that only one process (chosen randomly or by priority) takes action.
 
 
-reference:
-https://en.wikipedia.org/wiki/Deadlock
-http://stackoverflow.com/questions/6155951/whats-the-difference-between-deadlock-and-livelock
+## Reference
+ - [wiki Deadlock](https://en.wikipedia.org/wiki/Deadlock)
+ - [whats the difference between deadlock and livelock](http://stackoverflow.com/questions/6155951/whats-the-difference-between-deadlock-and-livelock)

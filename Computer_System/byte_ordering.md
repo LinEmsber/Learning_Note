@@ -1,0 +1,39 @@
+# Byte Ordering
+
+## Introduction
+In virtually all machines, a multi-byte object is stored as a contiguous sequence of bytes, with the address of the object given by the smallest address of the bytes used.
+
+For example, suppose a variable x of type int has address 0x100, that is, the value of the address expression &x is 0x100. Then the 4 bytes of x would be stored in memory locations 0x100, 0x101, 0x102, and 0x103.
+
+For ordering the bytes representing an object, there are two common conventions.
+
+The former convention, where the least significant byte comes first—is referred to as little endian.
+
+The latter convention, where the most significant byte comes first—is referred to as big endian.
+
+
+Big endian:
+```bash
+...     0x100   0x101   0x102   0x103   ...
+...     01      23      45      67      ...
+```
+
+Little endian:
+```bash
+...     0x100   0x101   0x102   0x103   ...
+...     67      45      23      01      ...
+```
+
+A second case where byte ordering becomes important is when looking at the byte sequences representing integer data. This occurs often when inspecting machine-level programs.
+
+As an example, the following line occurs in a file that gives a text representation of the machine-level code for an Intel IA32 processor:
+
+```bash
+80483bd:        01 05 64 94 04 08       add %eax,       0x8049464
+```
+
+We simply note that this line states that the hexadecimal byte sequence 01 05 64 94 04 08 is the byte- level representation of an instruction that adds a word of data to the value stored at address 0x8049464. If we take the final 4 bytes of the sequence, 64 94 04 08, and write them in reverse order, we have 08 04 94 64.
+
+
+## References
+ - Computer Systems A Programmers Perspective 2nd, Ch.2.1

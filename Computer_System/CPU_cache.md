@@ -1,6 +1,6 @@
-===============================================================================
-                                CPU cache
-===============================================================================
+# CPU cache
+
+## Introduction
 
 A CPU cache is a hardware cache used by the central processing unit (CPU) of a computer to reduce the average
 cost (time or energy) to access data from the main memory. The cache is a smaller, faster memory which stores
@@ -29,8 +29,6 @@ executable instruction fetch, a data cache to speed up data fetch and store, and
 (TLB) used to speed up virtual-to-physical address translation for both executable instructions and data.
 
 
--------------------------------------------------------------------------------
-
 The basic purpose of cache memory is to store program instructions that are frequently re-referenced by software
 during operation. Fast access to these instructions increases the overall speed of the software program.
 
@@ -44,7 +42,7 @@ with slower processors but larger caches tend to be faster than measurements of 
 with faster processors but more limited cache space.
 
 
-Cache memory levels explained:
+## Cache memory levels explained
 
 Level 1 (L1) cache is extremely fast but relatively small, and is usually embedded in the processor chip (CPU).
 
@@ -58,7 +56,7 @@ each core may have its own dedicated L1 and L2 cache, but share a common L3 cach
 in the L3 cache, it is typically elevated to a higher tier cache.
 
 
-Cache entries:
+## Cache entries
 Data is transferred between memory and cache in blocks of fixed size, called cache lines or cache blocks.
 When a cache line is copied from memory into the cache, a cache entry is created. The cache entry will
 include the copied data as well as the requested memory location (called a tag).
@@ -72,7 +70,7 @@ line. For a cache miss, the cache allocates a new entry and copies data from mai
 is fulfilled from the contents of the cache.
 
 
-Replacement policies:
+## Replacement policies
 In order to make room for the new entry on a cache miss, the cache may have to evict one of the existing
 entries. The heuristic that it uses to choose the entry to evict is called the replacement policy. The
 fundamental problem with any replacement policy is that it must predict which existing cache entry is least
@@ -81,7 +79,7 @@ among the variety of replacement policies available. One popular replacement pol
 (LRU), replaces the least recently accessed entry.
 
 
-Write policies:
+## Write policies
 If data is written to the cache, at some point it must also be written to main memory; the timing of this
 write is known as the write policy. In a write-through cache, every write to the cache causes a write to
 main memory. Alternatively, in a write-back or copy-back cache, writes are not immediately mirrored to the
@@ -103,7 +101,7 @@ of data in caches associated with other CPUs become stale. Communication protoco
 that keep the data consistent are known as cache coherence protocols.
 
 
-Cache performance:
+## Cache performance
 Cache performance measurement has become important in the recent times where the speed gap between the
 memory performance and the processor performance is increasing exponentially. The cache was introduced to
 reduce this speed gap. Thus knowing how well the cache is able to bridge the gap in the speed of processor
@@ -113,7 +111,7 @@ reducing the miss rate becomes one of the necessary steps among other steps. Dec
 to the cache also gives a boost to its performance.
 
 
-CPU stalls:
+## CPU stalls
 The time taken to fetch one cache line from memory (read latency due to a cache miss) matters because
 the CPU will run out of things to do while waiting for the cache line. When a CPU reaches this state,
 it is called a stall. As CPUs become faster compared to main memory, stalls due to cache misses displace
@@ -128,7 +126,7 @@ which allows an alternate thread to use the CPU core while the first thread wait
 to become available.
 
 
-References:
-Operating Sytem Concepts 9th
-https://en.wikipedia.org/wiki/CPU_cache
-http://searchstorage.techtarget.com/definition/cache-memory
+## References
+ - Operating Sytem Concepts 9th
+ - [wiki CPU_cache](https://en.wikipedia.org/wiki/CPU_cache)
+ - [cache memory](http://searchstorage.techtarget.com/definition/cache-memory)
