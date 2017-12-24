@@ -1,4 +1,4 @@
-# Referring to a Type with typeof()
+# typeof()
 
 ## Introduction
 
@@ -12,8 +12,7 @@ An operator provided by several programming languages to determine the data type
 typeof (x[0](1))
 ```
 
-This assumes that x is an array of pointers to functions; the type described is that of the values
-of the functions.
+This assumes that x is an array of pointers to functions; the type described is that of the values of the functions.
 
 - Here is an example with a typename as the argument:
 
@@ -23,17 +22,13 @@ typeof (int *)
 
 Here the type described is that of pointers to int.
 
-
-
-The operand of typeof is evaluated for its side effects if and only if it is an expression of variably
-modified type or the name of such a type.
+The operand of typeof is evaluated for its side effects if and only if it is an expression of variably modified type or the name of such a type.
 
 typeof is often useful in conjunction with statement expressions.
 
 
 ## Example:
-Here is how the two together can be used to define a safe "maximum" macro which operates on any arithmetic type
-and evaluates each of its arguments exactly once:
+Here is how the two together can be used to define a safe "maximum" macro which operates on any arithmetic type and evaluates each of its arguments exactly once:
 
 ```c
 #define max(a,b)                \
@@ -42,38 +37,35 @@ and evaluates each of its arguments exactly once:
         _a > _b ? _a : _b; })
 ```
 
-There is just some kind of weird ({}) block with two statements in it. This in fact is a GNU extension to
-C language called braced-group within expression. The compiler will evaluate the whole block and use the
-value of the last.
+There is just some kind of weird ({}) block with two statements in it. This in fact is a GNU extension to C language called braced-group within expression. The compiler will evaluate the whole block and use the value of the last.
 
-The reason for using names that start with underscores for the local variables is to avoid conflicts
-with variable names that occur within the expressions that are substituted for a and b.
+The reason for using names that start with underscores for the local variables is to avoid conflicts with variable names that occur within the expressions that are substituted for a and b.
 
 
 ## Some more examples of the use of typeof:
 
-This declares y with the type of what x points to.
+ - This declares y with the type of what x points to.
 ```c
 typeof (*x) y;
 ```
-This declares y as an array of such values.
+
+ - This declares y as an array of such values.
 ```c
 typeof (*x) y[4];
 ```
 
-This declares y as an array of pointers to characters:
+ - This declares y as an array of pointers to characters:
 ```c
 typeof (typeof (char *)[4]) y;
 ```
 
-It is equivalent to the following traditional C declaration:
+ - It is equivalent to the following traditional C declaration:
 ```c
 char *y[4];
 ```
 
 
-To see the meaning of the declaration using typeof, and why it might be a useful way to write,
-rewrite it with these macros:
+To see the meaning of the declaration using typeof, and why it might be a useful way to write, rewrite it with these macros:
 
 ```c
 #define pointer(T)  typeof(T *)
@@ -88,6 +80,31 @@ array (pointer (char), 4) y;
 
 Thus, array (pointer (char), 4) is the type of arrays of 4 pointers to char.
 
+A demonstration as follows:
+
+```c
+#include <stdio.h>
+
+#define pointer(T)  typeof(T *)
+#define array(T, N) typeof(T [N])
+
+int main()
+{
+        int * ptr_int_arr[5];
+        array(char *, 10) ptr_char_arr;
+
+        return 0;
+}
+```
+
+Use GDB to check type:
+
+```bash
+(gdb) ptype ptr_int_arr
+type = int *[5]
+(gdb) ptype ptr_char_arr
+type = char *[10]
+```
 
 ## references:
 - [gcc/Typeof](https://gcc.gnu.org/onlinedocs/gcc/Typeof.html)
