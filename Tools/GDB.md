@@ -2,7 +2,7 @@
 
 ## Enable TUI:
 
-```bash
+```shell=
 > gdb -tui a.out
 or
 > gdbtui a.out
@@ -13,22 +13,32 @@ or
 > ctrl + a
 ```
 
+Use a TUI layout with only one window. The layout will either be ‘source’ or ‘assembly’. When the TUI mode is not active, it will switch to the TUI mode.
+```shell=
+C-x 1
+```
+
+Use a TUI layout with at least two windows. When the current layout already has two windows, the next layout with two windows is used. When a new layout is chosen, one window will always be common to the previous layout and the new one.
+```shell=
+C-x 2
+```
+
 ## Disable TUI:
 
 In the gdbtui.
-```bash
+```shell=
 > tui disable
 ```
 
 ## assembly layout:
 
-```bash
+```shell=
 > gdb a.out
 > layout sam
 ```
 
 ## view both assembly and code:
-```bash
+```shell=
 > gbdtui a.out
 > layout split
 ```
@@ -36,49 +46,54 @@ In the gdbtui.
 ## Changes which TUI window is currently active for scrolling.
 
 Make the next window active for scrolling.
-```bash
+```shell=
 > focus next
 ```
 
 Make the previous window active for scrolling.
-```bash
+```shell=
 > focus prev
 ```
 
 Make the source window active for scrolling.
-```bash
+```shell=
 > focus src
 ```
 
 Make the assembly window active for scrolling.
-```bash
+```shell=
 > focus asm
 ```
 
 Make the register window active for scrolling.
-```bash
+```shell=
 > focus regs
 ```
 
 Make the command window active for scrolling.
-```bash
+```shell=
 > focus cmd
+```
+
+Change the height of the window name by count lines.
+```shell=
+> winheight asm 20
 ```
 
 ## run GDB with arguments:
 
 run a program with command line args
-```bash
+```shell=
 > gdb --args executable_file arg1 arg2 arg3
 ```
 
 set the args in the GDB
-```bash
+```shell=
 > set args 1 22 33
 ```
 show the args in the GDB
 Argument list to give program being debugged when it is started is "1 22 33".
-```bash
+```shell=
 > show args
 ```
 
@@ -86,14 +101,14 @@ Argument list to give program being debugged when it is started is "1 22 33".
 A breakpoint makes your program stop whenever a certain point in the program is reached.
 
 breakpoint at main function
-```bash
+```shell=
 > break main
 or
 > b main
 ```
 
 set up a break point inside C program
-```bash
+```shell=
 > break [file_name]:line_number
 or
 > break [file_name]:function_name
@@ -101,20 +116,20 @@ or
 
 Print a table of all breakpoints
 
-```bash
+```shell=
 > info break
 ```
 
 Remove breakpoint from line number or function
 
-```bash
+```shell=
 > clear [line_number]
 or
 > clear [function_name]
 ```
 
 ## run:
-```bash
+```shell=
 Use the run command to start your program under GDB.
 > run
 ```
@@ -122,12 +137,12 @@ Use the run command to start your program under GDB.
 ## start:
 
 The "start" command does the equivalent of setting a temporary breakpoint at the beginning of the main procedure and then invoking the "run" command.
-```bash
+```shell=
 > start
 ```
 
 ## GDB refresh screen:
-``` bash
+``` shell=
 Ctrl + L
 ```
 
@@ -135,7 +150,7 @@ Ctrl + L
 
 Step to next line of code. Will step into a function.
 You can step into a target function to print its local variables.
-```bash
+```shell=
 > step
 or
 > s
@@ -144,7 +159,7 @@ or
 ## GDB next:
 Execute next line of code. Will not enter functions.
 
-```bash
+```shell=
 > next
 or
 > n
@@ -154,7 +169,7 @@ or
 This will print the value of the given expression. Most simple Ada expression formats are properly handled
 by GDB, so the expression can contain function calls, variables, operators, and attribute references.
 
-```bash
+```shell=
 > print variable
 or
 > print function
@@ -163,23 +178,23 @@ or
 ## GDB print variable in hexadecimal, decimal, or binary:
 
 hexadecimal:
-```bash
+```shell=
 > p/x variable
 ```
 
 decimal:
-```bash
+```shell=
 > p/d variable
 ```
 
 binary:
-```bash
+```shell=
 > p/t variable
 ```
 
 ## whatis
 Print the data type of expression expr.
-```bash
+```shell=
 > whatis expr
 ```
 
@@ -195,7 +210,7 @@ struct complex {double real; double imag;} v;
 
 the two commands give this output:
 
-```bash 	
+```shell=
 (gdb) whatis v
 type = struct complex
 (gdb) ptype v
@@ -208,18 +223,18 @@ type = struct complex {
 ## Exam memory:
 
 exam program counter:
-```bash
+```shell=
 > x/10i $pc
 ```
 
 exam main function:
-```bash
+```shell=
 > x/10i main
 ```
 
 exam function:
 
-```bash
+```shell=
 > x/10i [function]
 ```
 
@@ -227,7 +242,7 @@ exam function:
 ## GDB backtrace:
 Show trace of where you are currently. Which functions you are in. Prints stack backtrace.
 
-```bash
+```shell=
 > breaktrace
 or
 > bt
@@ -238,29 +253,29 @@ Set a watchpoint for an expression.
 GDB will break when the expression expr is written into by the program and its value changes.
 The simplest (and the most popular) use of this command is to watch the value of a single variable.
 
-```bash
+```shell=
 > watch foo
 ```
 
 Print a table of all watchpoints
 
-```bash
+```shell=
 > info watch
 ```
 
 ## GDB frame:
 Show current stack frame (function where you are stopped)
 
-```bash
+```shell=
 > frame
 ```
 
-```bash
+```shell=
 Move up a single frame (element in the call stack)
 > up
 ```
 
-```bash
+```shell=
 Move down a single frame
 > down
 ```
@@ -269,49 +284,49 @@ Move down a single frame
 
 The command disassemble to display a range of addresses as machine instructions.
 
-```bash
+```shell=
 disass <function>
 ```
 
 ## registers:
 
 Print the names and values of all registers except floating-point and vector registers (in the selected stack frame).
-```bash
+```shell=
 > info registers
 ```
 
 Print the names and values of all registers, including floating-point and vector registers (in the selected stack frame).
-```bash
+```shell=
 > info all-registers
 ```
 
 you could print the program counter in hex with
 
-```bash
+```shell=
 > p/x $pc
 ```
 
 or print the instruction to be executed next with
 
-```bash
+```shell=
 > x/i $pc
 ```
 
 or add four to the stack pointer11 with
 
-```bash
+```shell=
 > set $sp += 4
 ```
 
 ## eflags:
 show the value of flags register now
-```bash
+```shell=
 > info reg eflags
 ```
 
 ## for loop
 
-```bash
+```shell=
 (gdb) set $pos=0
 
 (gdb) print array[$pos++]
@@ -326,8 +341,8 @@ content of array[2]
 
 ## memory check:
 
-In the bash command line:
-```bash
+In the shell= command line:
+```shell=
 > valgrind --tool=memcheck --leak-check=yes ./test
 ```
 
@@ -335,7 +350,7 @@ In the bash command line:
 - [Debugging with GDB](https://sourceware.org/gdb/onlinedocs/gdb/index.html)
 - [Become a GDB Power User](https://www.youtube.com/watch?v=713ay4bZUrw)
 - [GDB view assembly](http://stackoverflow.com/questions/9970636/view-both-assembly-and-c-code)
-- [GDB with arguemnts](http://stackoverflow.com/questions/6121094/how-do-i-run-a-program-with-commandline-args-using-gdb-within-a-bash-script)
+- [GDB with arguemnts](http://stackoverflow.com/questions/6121094/how-do-i-run-a-program-with-commandline-args-using-gdb-within-a-shell=-script)
 - [Setting Breakpoints](https://sourceware.org/gdb/onlinedocs/gdb/Set-Breaks.html#Set-Breaks)
 - [GDB commands](http://www.yolinux.com/TUTORIALS/GDB-Commands.html)
 - [valgrind usage](http://cs.ecs.baylor.edu/~donahoo/tools/valgrind/)
