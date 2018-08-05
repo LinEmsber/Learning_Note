@@ -1,26 +1,15 @@
 # Side effect (computer science)
 
 # Introduction
-In computer science, a function or expression is said to have a side effect if it modifies some state or
-has an observable interaction with calling functions or the outside world. For example, a particular
-function might modify a global variable or static variable, modify one of its arguments, raise an exception,
-write data to a display or file, read data, or call other side-effecting functions.
+In computer science, a function or expression is said to have a side effect if it modifies some state or has an observable interaction with calling functions or the outside world. For example, a particular function might modify a global variable or static variable, modify one of its arguments, raise an exception, write data to a display or file, read data, or call other side-effecting functions.
 
-In the presence of side effects, a program's behaviour may depend on history; that is, the order of evaluation
-matters. Understanding and debugging a function with side effects requires knowledge about the context and its
-possible histories.
+In the presence of side effects, a program's behaviour may depend on history; that is, the order of evaluation matters. Understanding and debugging a function with side effects requires knowledge about the context and its possible histories.
 
-Assembly language programmers must be aware of hidden side effects — instructions that modify parts of the
-processor state which are not mentioned in the instruction's mnemonic. A classic example of a hidden side
-effect is an arithmetic instruction that implicitly modifies condition codes (a hidden side effect) while it
-explicitly modifies a register (the overt effect)
+Assembly language programmers must be aware of hidden side effects — instructions that modify parts of the processor state which are not mentioned in the instruction's mnemonic. A classic example of a hidden side effect is an arithmetic instruction that implicitly modifies condition codes (a hidden side effect) while it explicitly modifies a register (the overt effect)
 
 ## Temporal side effects
 
-Side effects caused by the time taken for an operation to execute are usually ignored when discussing side effects
-and referential transparency. There are some cases, such as with hardware timing or testing, where operations are
-inserted specifically for their temporal side effects e.g. Sleep(5000) or for(int i=0; i < 10000; i++){}. These
-instructions do not change state other than taking an amount of time to complete.
+Side effects caused by the time taken for an operation to execute are usually ignored when discussing side effects and referential transparency. There are some cases, such as with hardware timing or testing, where operations are inserted specifically for their temporal side effects e.g. Sleep(5000) or for(int i=0; i < 10000; i++){}. These instructions do not change state other than taking an amount of time to complete.
 
 ## Example
 
